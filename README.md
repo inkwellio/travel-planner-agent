@@ -40,7 +40,7 @@ npm run typecheck && npm run test && npm run test:mp
 
 - **不要提交** `.env`、AppSecret、真实小程序 AppID、支付或第三方 Key。仓库里只有空的 `.env.example`。
 - 小程序 `project.config.json` 使用占位 AppID `touristappid`；本机覆盖写在已忽略的 `project.private.config.json`。
-- 管理后台初始账号在 `server/src/config/admin.ts`（占位密码，**部署前务必修改**），也可用 `ADMIN_PHONE` / `ADMIN_PASSWORD` 覆盖。
+- 管理后台没有默认密码。使用前在 `.env` 设置 `ADMIN_PASSWORD`（以及可选的 `ADMIN_PHONE`）；未设置 `ADMIN_PASSWORD` 时无法登录。手机号留空时使用 `server/src/config/admin.ts` 里的占位号 `13800138000`（不是真实号码）。
 - 杭州景点库是**示例数据**（`server/src/attractions/sampleHangzhou.ts`），仅供无地图 Key 时演示。
 - 不做订票/支付；不收集微信昵称、头像或手机号（匿名会话）。
 
@@ -61,4 +61,4 @@ screenshots/   界面截图（演示用公开景点）
 
 [MIT](LICENSE)。代码可自由使用与商用；产品名「行程助手」、品牌图标（含 `xingcheng` 资源）及截图中的视觉标识**不在授权范围内**，二次开发或上架请使用自己的名称与图标。
 
-私有源仓库 `inkwellio/travel-agent` 继续保留，本仓库为独立公开副本，不含其提交历史。
+本仓库是从私有开发仓库脱敏整理出的公开版本，为独立副本，不含该私有仓库的提交历史。

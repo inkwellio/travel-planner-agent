@@ -280,7 +280,7 @@ test('admin login limiter isolates IPs and allows retry after the window', async
 });
 
 
-test('admin configuration provides deployment credentials with optional environment overrides', async () => {
+test('admin login stays disabled until ADMIN_PASSWORD is set', async () => {
   const { adminConfig } = await import('./config/admin.js');
   const { createAdminSession, adminAuthorized, revokeAdminSession } = await import('./adminAuth.js');
   const savedPhone = process.env.ADMIN_PHONE;
@@ -288,18 +288,20 @@ test('admin configuration provides deployment credentials with optional environm
   try {
     delete process.env.ADMIN_PHONE;
     delete process.env.ADMIN_PASSWORD;
-    const token = createAdminSession(adminConfig.phone, adminConfig.password);
+    assert.equal(adminConfig.password, '');
+    assert.equal(createAdminSession(adminConfig.phone, 'ChangeMeOnDeploy!1'), undefined);
+    assert.equal(createAdminSession(adminConfig.phone, 'any-password'), undefined);
+    process.env.ADMIN_PHONE = '';
+    process.env.ADMIN_PASSWORD = '';
+    assert.equal(createAdminSession(adminConfig.phone, 'any-password'), undefined);
+    process.env.ADMIN_PASSWORD = 'deployment-password-override';
+    const token = createAdminSession(adminConfig.phone, process.env.ADMIN_PASSWORD);
     assert.ok(token);
     assert.equal(adminAuthorized(`Bearer ${token}`), true);
     assert.equal(createAdminSession(adminConfig.phone, 'wrong-password'), undefined);
-    process.env.ADMIN_PHONE = '';
-    process.env.ADMIN_PASSWORD = '';
-    assert.equal(adminAuthorized(`Bearer ${token}`), true);
-    assert.ok(createAdminSession(adminConfig.phone, adminConfig.password));
     process.env.ADMIN_PHONE = '13900139000';
-    process.env.ADMIN_PASSWORD = 'deployment-password-override';
     assert.equal(adminAuthorized(`Bearer ${token}`), false);
-    assert.equal(createAdminSession(adminConfig.phone, adminConfig.password), undefined);
+    assert.equal(createAdminSession(adminConfig.phone, process.env.ADMIN_PASSWORD), undefined);
     const overridden = createAdminSession(process.env.ADMIN_PHONE, process.env.ADMIN_PASSWORD);
     assert.ok(overridden);
     revokeAdminSession(`Bearer ${overridden}`);

@@ -22,7 +22,7 @@ function tokenKey(header: string | undefined) {
   return match ? hash(match[1]).toString('hex') : undefined;
 }
 
-/** 独立于匿名访客会话；默认读取服务端配置，也支持环境变量覆盖。 */
+/** 独立于匿名访客会话。优先读 ADMIN_PHONE / ADMIN_PASSWORD，缺省回退到服务端配置；配置密码为空则无法登录。 */
 export function createAdminSession(phone: string, password: string): string | undefined {
   const config = credentials();
   if (!config) return undefined;
