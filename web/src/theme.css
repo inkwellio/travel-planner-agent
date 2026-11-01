@@ -1,0 +1,210 @@
+/* 自动生成：python3 scripts/gen-theme.py —— 勿手改。组件只用语义色（Tailwind 映射到这些变量）。 */
+:root, [data-theme="d"] {
+  --c-background: 245 242 236;
+  --c-surface: 245 242 236;
+  --c-surface-bright: 245 242 236;
+  --c-surface-dim: 211 221 218;
+  --c-surface-container-lowest: 255 255 255;
+  --c-surface-container-low: 250 248 246;
+  --c-surface-container: 231 237 234;
+  --c-surface-container-high: 220 228 225;
+  --c-surface-container-highest: 211 221 218;
+  --c-surface-variant: 211 221 218;
+  --c-on-surface: 46 53 50;
+  --c-on-background: 46 53 50;
+  --c-on-surface-variant: 87 94 90;
+  --c-outline: 138 143 139;
+  --c-outline-variant: 198 204 201;
+  --c-primary: 91 123 122;
+  --c-surface-tint: 91 123 122;
+  --c-on-primary: 255 255 255;
+  --c-primary-container: 116 143 142;
+  --c-on-primary-container: 46 53 50;
+  --c-primary-fixed: 232 237 236;
+  --c-primary-fixed-dim: 189 202 202;
+  --c-on-primary-fixed: 66 84 82;
+  --c-on-primary-fixed-variant: 78 102 100;
+  --c-inverse-primary: 189 202 202;
+  --c-secondary: 176 141 87;
+  --c-on-secondary: 255 255 255;
+  --c-secondary-container: 176 141 87;
+  --c-on-secondary-container: 255 255 255;
+  --c-secondary-fixed: 243 238 230;
+  --c-secondary-fixed-dim: 223 209 188;
+  --c-on-secondary-fixed: 104 93 67;
+  --c-on-secondary-fixed-variant: 137 115 76;
+  --c-tertiary: 82 109 108;
+  --c-on-tertiary: 255 255 255;
+  --c-tertiary-container: 91 123 122;
+  --c-on-tertiary-container: 255 255 255;
+  --c-tertiary-fixed: 232 237 236;
+  --c-tertiary-fixed-dim: 189 202 202;
+  --c-on-tertiary-fixed: 66 84 82;
+  --c-on-tertiary-fixed-variant: 78 102 100;
+  --c-error: 164 85 79;
+  --c-on-error: 255 255 255;
+  --c-error-container: 241 230 229;
+  --c-on-error-container: 117 72 67;
+  --c-inverse-surface: 46 53 50;
+  --c-inverse-on-surface: 245 242 236;
+  --c-day-1: 91 123 122;
+  --c-day-2: 176 141 87;
+  --c-day-3: 71 92 90;
+  --c-day-4: 138 143 139;
+  --c-shadow: 0 0 0;
+}
+[data-theme="e"] {
+  --c-background: 244 241 241;
+  --c-surface: 244 241 241;
+  --c-surface-bright: 244 241 241;
+  --c-surface-dim: 225 213 213;
+  --c-surface-container-lowest: 255 255 255;
+  --c-surface-container-low: 250 248 248;
+  --c-surface-container: 239 230 230;
+  --c-surface-container-high: 231 220 220;
+  --c-surface-container-highest: 225 213 213;
+  --c-surface-variant: 225 213 213;
+  --c-on-surface: 58 51 53;
+  --c-on-background: 58 51 53;
+  --c-on-surface-variant: 101 93 95;
+  --c-outline: 154 145 146;
+  --c-outline-variant: 209 200 201;
+  --c-primary: 140 106 110;
+  --c-surface-tint: 140 106 110;
+  --c-on-primary: 255 255 255;
+  --c-primary-container: 157 128 132;
+  --c-on-primary-container: 58 51 53;
+  --c-primary-fixed: 239 234 235;
+  --c-primary-fixed-dim: 209 195 197;
+  --c-on-primary-fixed: 95 76 79;
+  --c-on-primary-fixed-variant: 115 90 93;
+  --c-inverse-primary: 209 195 197;
+  --c-secondary: 111 127 140;
+  --c-on-secondary: 255 255 255;
+  --c-secondary-container: 111 127 140;
+  --c-on-secondary-container: 255 255 255;
+  --c-secondary-fixed: 233 236 238;
+  --c-secondary-fixed-dim: 197 204 209;
+  --c-on-secondary-fixed: 82 85 92;
+  --c-on-secondary-fixed-variant: 95 104 114;
+  --c-tertiary: 124 95 99;
+  --c-on-tertiary: 255 255 255;
+  --c-tertiary-container: 140 106 110;
+  --c-on-tertiary-container: 255 255 255;
+  --c-tertiary-fixed: 239 234 235;
+  --c-tertiary-fixed-dim: 209 195 197;
+  --c-on-tertiary-fixed: 95 76 79;
+  --c-on-tertiary-fixed-variant: 115 90 93;
+  --c-error: 164 85 79;
+  --c-on-error: 255 255 255;
+  --c-error-container: 241 230 229;
+  --c-on-error-container: 122 71 69;
+  --c-inverse-surface: 58 51 53;
+  --c-inverse-on-surface: 244 241 241;
+  --c-day-1: 140 106 110;
+  --c-day-2: 111 127 140;
+  --c-day-3: 103 81 84;
+  --c-day-4: 154 145 146;
+  --c-shadow: 0 0 0;
+}
+[data-theme="f"] {
+  --c-background: 243 244 241;
+  --c-surface: 243 244 241;
+  --c-surface-bright: 243 244 241;
+  --c-surface-dim: 207 211 206;
+  --c-surface-container-lowest: 255 255 255;
+  --c-surface-container-low: 249 250 248;
+  --c-surface-container: 230 233 228;
+  --c-surface-container-high: 217 220 215;
+  --c-surface-container-highest: 207 211 206;
+  --c-surface-variant: 207 211 206;
+  --c-on-surface: 35 40 38;
+  --c-on-background: 35 40 38;
+  --c-on-surface-variant: 82 87 84;
+  --c-outline: 139 145 141;
+  --c-outline-variant: 198 202 198;
+  --c-primary: 63 75 69;
+  --c-surface-tint: 63 75 69;
+  --c-on-primary: 255 255 255;
+  --c-primary-container: 92 102 97;
+  --c-on-primary-container: 35 40 38;
+  --c-primary-fixed: 228 230 229;
+  --c-primary-fixed-dim: 178 183 181;
+  --c-on-primary-fixed: 48 56 52;
+  --c-on-primary-fixed-variant: 55 64 60;
+  --c-inverse-primary: 178 183 181;
+  --c-secondary: 169 139 106;
+  --c-on-secondary: 255 255 255;
+  --c-secondary-container: 169 139 106;
+  --c-on-secondary-container: 255 255 255;
+  --c-secondary-fixed: 242 238 233;
+  --c-secondary-fixed-dim: 221 209 195;
+  --c-on-secondary-fixed: 95 85 69;
+  --c-on-secondary-fixed-variant: 129 109 86;
+  --c-tertiary: 57 68 63;
+  --c-on-tertiary: 255 255 255;
+  --c-tertiary-container: 63 75 69;
+  --c-on-tertiary-container: 255 255 255;
+  --c-tertiary-fixed: 228 230 229;
+  --c-tertiary-fixed-dim: 178 183 181;
+  --c-on-tertiary-fixed: 48 56 52;
+  --c-on-tertiary-fixed-variant: 55 64 60;
+  --c-error: 164 85 79;
+  --c-on-error: 255 255 255;
+  --c-error-container: 241 230 229;
+  --c-on-error-container: 112 67 63;
+  --c-inverse-surface: 35 40 38;
+  --c-inverse-on-surface: 243 244 241;
+  --c-day-1: 63 75 69;
+  --c-day-2: 169 139 106;
+  --c-day-3: 50 59 55;
+  --c-day-4: 139 145 141;
+  --c-shadow: 0 0 0;
+}
+
+/* ===== 视觉规范（手写）
+   颜色与圆角只在这里定义。组件用语义色和 rounded-pill / rounded-card / rounded-field / rounded-panel。
+   宣纸青瓷纯色：背景 #F5F2EC，卡片 #FFFFFF，主色 #5B7B7A，悬停 #4D6B6A，
+   柔和底 / 发丝线 #E7EDEA，浅底 #FAF8F5，强线 #D5E1DC，点缀 #B08D57，
+   文字 #2E3532，弱化 #8A8F8B。
+   全站禁止渐变。投影（含半透明）会在圆角边缘发虚，一律不用；分隔只用 1px 描边。
+===== */
+:root {
+  --font-heading: 'Noto Serif SC', 'Songti SC', 'STSong', 'SimSun', serif;
+  --font-body: Inter, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Noto Sans SC', system-ui, sans-serif;
+  --app-header-h: 64px;
+  --radius-pill: 9999px; /* 主按钮、发送、标签、日期、筛选 */
+  --radius-card: 16px;  /* 卡片、气泡、站点 */
+  --radius-field: 20px; /* 输入框、次按钮 */
+  --radius-panel: 24px; /* 三栏外壳、底部抽屉顶 */
+  --radius-tail: 4px;   /* 气泡尖角、小标记 */
+  --c-line-strong: 213 225 220;
+}
+/* 只修正默认宣纸青瓷。E/F 仍用生成表里的色，避免悬停色被盖掉。 */
+:root:not([data-theme="e"]):not([data-theme="f"]),
+[data-theme="d"] {
+  --c-primary-container: 77 107 106;      /* 主按钮悬停 #4D6B6A */
+  --c-surface-container-low: 250 248 245; /* 浅底 #FAF8F5 */
+  --c-outline-variant: 231 237 234;       /* 发丝线 #E7EDEA */
+  --c-line-strong: 213 225 220;           /* #D5E1DC */
+}
+body {
+  font-family: var(--font-body);
+  background: rgb(var(--c-background));
+  color: rgb(var(--c-on-surface));
+}
+h1, h2, h3, h4 { font-family: var(--font-heading); font-weight: 600; letter-spacing: 0; }
+*, *::before, *::after { box-shadow: none !important; }
+header { position: relative; background: rgb(var(--c-surface-container-lowest)); }
+/* 1px 线不占高度，64px 顶栏内容区仍是偶数，头像落在整像素上 */
+header::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 1px;
+  background: rgb(var(--c-outline-variant));
+  pointer-events: none;
+}
+

@@ -1,0 +1,64 @@
+<view class="host leg">
+  <view class="rail">
+    <view class="dot">
+      <icon wx:if="{{mode === 'subway'}}" name="subway" tone="white" size="22" />
+      <icon wx:elif="{{mode === 'bus'}}" name="directions_bus" tone="white" size="22" />
+      <icon wx:else name="directions_car" tone="white" size="22" />
+    </view>
+  </view>
+  <view class="panel">
+    <view class="head">
+      <view class="route">
+        <text class="title">从 {{leg.from}} 到 {{leg.to}}</text>
+        <text wx:if="{{leg.distance}}" class="km">路程 {{leg.distance}} km</text>
+      </view>
+      <view class="switch">
+        <view class="pill {{mode === 'subway' ? 'on' : ''}}" data-mode="subway" catch:tap="onMode">地铁</view>
+        <view class="pill {{mode === 'bus' ? 'on' : ''}}" data-mode="bus" catch:tap="onMode">公交</view>
+        <view class="pill {{mode === 'driving' ? 'on' : ''}}" data-mode="driving" catch:tap="onMode">自驾</view>
+      </view>
+    </view>
+    <text wx:if="{{leg.transitNote}}" class="km">{{leg.transitNote}}</text>
+    <view wx:if="{{mode !== 'driving' && transit}}" class="block">
+      <text class="title">{{transit.label}}</text>
+      <view class="flow">
+        <view wx:if="{{transit.walk}}" class="step">
+          <icon name="directions_walk" tone="muted" size="30" />
+          <text>{{transit.walk}}</text>
+        </view>
+        <block wx:for="{{transit.steps}}" wx:key="key" wx:for-item="step">
+          <icon name="arrow_forward" tone="muted" size="28" />
+          <view class="line-pill">
+            <icon wx:if="{{step.subway}}" name="subway" tone="primary" size="28" />
+            <icon wx:elif="{{step.bus}}" name="directions_bus" tone="primary" size="28" />
+            <icon wx:else name="route" tone="muted" size="28" />
+            <text>{{step.line}}</text>
+          </view>
+          <text wx:if="{{step.transfer}}" class="xfer">在「{{step.transfer}}」换乘</text>
+        </block>
+        <icon name="arrow_forward" tone="muted" size="28" />
+        <text class="dest">「{{transit.to}}」</text>
+      </view>
+      <view class="foot">
+        <text>总耗时约 <text class="em">{{transit.duration}}分钟</text> | 换乘 {{transit.transfers}} 次</text>
+        <text wx:if="{{transit.ref}}" class="ref {{transit.ref.kind}}" data-url="{{transit.ref.url}}" catch:tap="onRef">{{transit.ref.text}}</text>
+        <text wx:if="{{transit.fare !== ''}}" class="fare">票价: ¥{{transit.fare}}/人</text>
+        <text wx:else class="km">票价待确认</text>
+      </view>
+    </view>
+    <text wx:if="{{message}}" class="km">{{message}}</text>
+    <view wx:if="{{mode === 'driving' && leg.driving}}" class="block">
+      <text class="title">自驾方案</text>
+      <view class="drive">
+        <view class="step"><icon name="schedule" tone="muted" size="30" /><text>用时 <text class="em">{{leg.driving.duration}} 分钟</text></text></view>
+        <view class="step"><icon name="route" tone="muted" size="30" /><text>里程 {{leg.driving.distance}} km</text></view>
+        <view class="step"><icon name="toll" tone="muted" size="30" /><text>过路费 ¥{{leg.driving.tolls}}</text></view>
+        <text wx:if="{{leg.driving.ref}}" class="ref {{leg.driving.ref.kind}}" data-url="{{leg.driving.ref.url}}" catch:tap="onRef">{{leg.driving.ref.text}}</text>
+      </view>
+      <view wx:if="{{leg.driving.parking}}" class="park">
+        <icon name="local_parking" tone="error" size="28" />
+        <text>{{leg.driving.parking}}</text>
+      </view>
+    </view>
+  </view>
+</view>

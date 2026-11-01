@@ -1,0 +1,92 @@
+@import "../../theme.wxss";
+
+.host { display: block; }
+.card {
+  position: relative;
+  display: flex;
+  gap: 24rpx;
+  padding: 28rpx;
+  border-radius: 32rpx;
+  background: var(--paper);
+  border: 1px solid var(--line);
+}
+.flag {
+  position: absolute;
+  top: 16rpx;
+  right: 16rpx;
+  height: 40rpx;
+  padding: 0 12rpx;
+  border-radius: 999rpx;
+  background: #DCE4E1;
+  color: var(--muted);
+  font-size: 20rpx;
+  line-height: 40rpx;
+}
+.box {
+  width: 32rpx;
+  height: 32rpx;
+  margin-top: 6rpx;
+  border-radius: 8rpx;
+  border: 1px solid var(--primary);
+  background: var(--paper);
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.box.on { background: var(--primary); }
+.tick {
+  width: 14rpx;
+  height: 8rpx;
+  border-left: 2px solid #fff;
+  border-bottom: 2px solid #fff;
+  transform: rotate(-45deg);
+  margin-top: -4rpx;
+}
+.thumb {
+  width: 128rpx;
+  height: 128rpx;
+  border-radius: 32rpx;
+  border: 1px solid var(--line);
+  overflow: hidden;
+  flex-shrink: 0;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.thumb.out { background: var(--primary-fixed); }
+.thumb.in { background: var(--secondary-fixed); }
+.photo { width: 128rpx; height: 128rpx; }
+.rate {
+  position: absolute;
+  right: 4rpx;
+  bottom: 4rpx;
+  display: flex;
+  align-items: center;
+  gap: 2rpx;
+  padding: 0 8rpx;
+  height: 32rpx;
+  border-radius: 999rpx;
+  background: var(--inverse);
+  color: var(--inverse-on);
+  font-size: 20rpx;
+  font-weight: 600;
+}
+.body { flex: 1; min-width: 0; padding-right: 96rpx; }
+.name { font-size: 28rpx; line-height: 40rpx; font-weight: 600; color: var(--ink); }
+.tags { display: flex; align-items: center; gap: 8rpx; margin-top: 4rpx; flex-wrap: wrap; }
+.tag {
+  height: 40rpx;
+  padding: 0 12rpx;
+  border-radius: 999rpx;
+  background: var(--secondary-fixed);
+  color: var(--on-sec-var);
+  font-size: 22rpx;
+  line-height: 40rpx;
+}
+.sample { font-size: 22rpx; color: var(--muted); }
+.hl { margin-top: 8rpx; font-size: 24rpx; line-height: 36rpx; color: var(--sub); }
+.meta { display: flex; flex-wrap: wrap; gap: 16rpx; margin-top: 12rpx; }
+.meta-item { display: flex; align-items: center; gap: 4rpx; font-size: 22rpx; color: var(--muted); }
+.walk { color: var(--primary); font-weight: 500; }

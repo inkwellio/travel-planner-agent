@@ -1,0 +1,22 @@
+@import "../../theme.wxss";
+
+.host { display: block; background: var(--paper); border-top: 1px solid var(--line); padding: 12rpx 32rpx 8rpx; }
+.field { border: 1px solid var(--line); border-radius: 32rpx; padding: 8rpx 10rpx 8rpx 20rpx; background: var(--paper); display: flex; align-items: center; gap: 12rpx; }
+.field.on { border-color: var(--primary); }
+/* 原生 textarea 把光标画在首行行盒里。行高必须等于高度，否则空态光标贴在 64rpx 框的顶部。 */
+.input { flex: 1; min-width: 0; width: 0; height: 64rpx; margin: 0; padding: 0; font-size: 26rpx; line-height: 64rpx; color: var(--ink); }
+.tools { display: flex; align-items: center; justify-content: flex-end; flex-shrink: 0; }
+.send {
+  height: 64rpx;
+  padding: 0 32rpx;
+  border-radius: 999rpx;
+  background: var(--primary);
+  color: #fff;
+  font-size: 26rpx;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8rpx;
+}
+.send.dis { opacity: 0.5; }
+.fine { margin-top: 8rpx; text-align: center; font-size: 22rpx; line-height: 32rpx; color: var(--muted); }

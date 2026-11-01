@@ -1,0 +1,33 @@
+<view class="host card" catch:tap="onToggle">
+  <view wx:if="{{card.refLabel}}" class="flag">{{card.refLabel}}</view>
+  <view class="box {{card.checked ? 'on' : ''}}">
+    <view wx:if="{{card.checked}}" class="tick"></view>
+  </view>
+  <view class="thumb {{card.indoor ? 'in' : 'out'}}">
+    <image wx:if="{{card.photo && !failed}}" class="photo" src="{{card.photo}}" mode="aspectFill" bind:error="onErr" />
+    <icon wx:elif="{{card.indoor}}" name="museum" tone="accent" size="48" />
+    <icon wx:else name="landscape" tone="primary" size="48" />
+    <view wx:if="{{card.rating}}" class="rate">
+      <icon name="star" tone="white" size="20" />
+      <text>{{card.rating}}</text>
+    </view>
+  </view>
+  <view class="body">
+    <view class="name">{{card.name}}</view>
+    <view class="tags">
+      <text wx:if="{{card.tag}}" class="tag">{{card.tag}}</text>
+      <text wx:if="{{card.sample}}" class="sample">· 示例数据</text>
+    </view>
+    <view wx:if="{{card.highlights}}" class="hl">{{card.highlights}}</view>
+    <view class="meta">
+      <view wx:if="{{card.duration}}" class="meta-item">
+        <icon name="schedule" tone="muted" size="26" />
+        <text>建议 {{card.duration}}</text>
+      </view>
+      <view wx:if="{{card.audience}}" class="meta-item walk">
+        <icon name="directions_walk" tone="primary" size="26" />
+        <text>{{card.audience}}</text>
+      </view>
+    </view>
+  </view>
+</view>

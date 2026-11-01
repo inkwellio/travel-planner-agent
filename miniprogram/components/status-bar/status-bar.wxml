@@ -1,0 +1,26 @@
+<view class="host bar {{disabled ? 'off' : ''}}">
+  <scroll-view class="chips" scroll-x enhanced show-scrollbar="{{false}}">
+    <view class="row">
+      <text class="label">规划参数:</text>
+      <view class="chip primary {{open === 'destination' ? 'hot' : ''}}" data-key="destination" catch:tap="onChip">
+        <icon name="location_on" tone="muted" size="30" />
+        <text>{{state.destination || '目的地'}}</text>
+        <icon name="edit" tone="muted" size="28" />
+      </view>
+      <view class="chip {{open === 'preferences' ? 'hot' : ''}}" data-key="preferences" catch:tap="onChip">
+        <icon name="favorite" tone="muted" size="30" />
+        <text>{{state.prefsLabel}}</text>
+        <icon name="expand_more" tone="muted" size="28" />
+      </view>
+    </view>
+  </scroll-view>
+  <view wx:if="{{open}}" class="pop">
+    <block wx:if="{{open === 'destination'}}">
+      <input class="field" placeholder="输入城市" placeholder-class="ph" value="{{dest}}" confirm-type="done" bind:input="onDest" bind:blur="onDestBlur" bind:confirm="onDestConfirm" />
+    </block>
+    <block wx:elif="{{open === 'preferences'}}">
+      <view wx:for="{{prefs}}" wx:key="*this" class="opt {{prefOn[item] ? 'on' : ''}}" data-v="{{item}}" catch:tap="onPref">{{item}}</view>
+    </block>
+    <view class="done" catch:tap="onDone">完成</view>
+  </view>
+</view>

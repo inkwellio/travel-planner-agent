@@ -1,0 +1,93 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html, body { margin: 0; padding: 0; overscroll-behavior: none; }
+
+/* 对话、行程列表、规划结果各自滚动。滚动层不要再设 display:flex：
+   flex 子项默认 min-height:auto，会按内容撑高，外层 overflow:hidden 把多余部分裁掉，滚轮和触摸都没距离可滚。
+   min-height:0 让滚动层能矮于内容。规划结果另加底边距和安全区，最后一项才不会被抽屉裁掉。 */
+.pane-scroll,
+.result-scroll {
+  min-height: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+}
+/* 对话和行程列表没有横向滚动的子项。单独锁住横向，避免 overflow-y:auto 把横向也变成滚动层，抢走竖滑。 */
+.pane-scroll { overflow-x: hidden; }
+.result-scroll {
+  padding-bottom: calc(1.25rem + env(safe-area-inset-bottom, 0px));
+}
+::-webkit-scrollbar { display: none; }
+.no-scrollbar { scrollbar-width: none; }
+
+/* 线性图标：尺寸 = 当前 font-size */
+.icon {
+  width: 1em;
+  height: 1em;
+  display: inline-block;
+  flex-shrink: 0;
+  vertical-align: -0.15em;
+  overflow: visible;
+}
+
+/* 偶数边头像。圆角用 --radius-pill，尺寸由内联宽高决定（顶栏 36 / 对话 28）。 */
+.avatar {
+  position: relative;
+  display: inline-block;
+  flex-shrink: 0;
+  overflow: hidden;
+  line-height: 0;
+  border-radius: var(--radius-pill);
+  vertical-align: middle;
+}
+.avatar .icon {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 46%;
+  height: 46%;
+  transform: translate(-50%, -50%);
+}
+
+/* 发送：胶囊，圆角与主按钮共用 --radius-pill */
+.send-btn {
+  height: 40px;
+  padding: 0 16px;
+  gap: 6px;
+  border: 0;
+  border-radius: var(--radius-pill);
+  background: rgb(var(--c-primary));
+  color: rgb(var(--c-on-primary));
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  line-height: 1;
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+.send-btn:hover:not(:disabled) { background: rgb(var(--c-primary-container)); }
+.send-btn:disabled { opacity: 0.5; }
+.send-btn:focus { outline: none; }
+.send-btn:focus-visible {
+  outline: 2px solid rgb(var(--c-primary));
+  outline-offset: 2px;
+}
+
+/* 骨架占位：纯色，不用扫光渐变 */
+.skeleton-bar { background: rgb(var(--c-surface-container)); border-radius: var(--radius-tail); }
+
+/* 误用 Tailwind 渐变时也不出渐变色 */
+[class*="bg-gradient"] { background-image: none !important; }
+
+@page { size: A4; margin: 12mm; }
+@media print {
+  .no-print { display: none !important; }
+  .print-page { break-after: page; }
+  .avoid-break { break-inside: avoid; }
+  body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+}

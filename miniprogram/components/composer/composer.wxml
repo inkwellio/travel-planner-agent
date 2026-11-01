@@ -1,0 +1,30 @@
+<view class="host composer">
+  <view class="field {{focus ? 'on' : ''}}">
+    <textarea
+      class="input"
+      maxlength="2000"
+      value="{{text}}"
+      disabled="{{cooldown > 0}}"
+      confirm-type="send"
+      show-confirm-bar="{{false}}"
+      adjust-position="{{false}}"
+      disable-default-padding="{{true}}"
+      cursor-spacing="24"
+      bind:input="onInput"
+      bind:focus="onFocus"
+      bind:blur="onBlur"
+      bind:confirm="onSend"
+      bind:keyboardheightchange="onKb"
+    />
+    <view class="tools">
+      <view class="send {{cooldown > 0 || busy || (!text && !ready) ? 'dis' : ''}}" catch:tap="onSend">
+        <text wx:if="{{cooldown > 0}}">{{cooldown}}</text>
+        <block wx:else>
+          <text>发送诉求</text>
+          <icon name="arrow_forward" tone="white" size="32" />
+        </block>
+      </view>
+    </view>
+  </view>
+  <view class="fine">{{footer}}</view>
+</view>

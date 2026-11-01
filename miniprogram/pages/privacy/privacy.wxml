@@ -1,0 +1,12 @@
+<view class="page">
+  <view class="serif h1">隐私说明</view>
+  <view class="p">行程助手小程序用于对话规划景点与路线，不提供订票和支付。</view>
+  <view class="h2">存在这台设备上的</view>
+  <view class="p">首次打开时服务器会签发匿名会话凭证并保存在本机，用来区分「我的行程」，无需提供微信昵称、头像或手机号。清除小程序数据后凭证会丢失，原先的行程无法自动找回。</view>
+  <view class="h2">发到我们服务器的</view>
+  <view class="p">你输入的城市、天数、偏好和对话，以及生成的路线，会存到行程服务（与 Web 版同一个后端）。地图上的点来自接口里的经纬度，小程序不读取你的定位。</view>
+  <view class="h2">本期没有调用的能力</view>
+  <view class="p">不使用微信登录、手机号、定位、剪贴板写入或微信支付。分享会展示 Web 链接；导出图片在微信图片预览中打开，可由你选择保存。</view>
+  <view class="h2">提审前仍要补的（TODO）</view>
+  <view class="p">在小程序后台填写《用户隐私保护指引》，声明开发者收集的匿名 ID 与行程对话内容。若以后要一键复制链接，再声明剪贴板，并接 wx.onNeedPrivacyAuthorization / agreePrivacyAuthorization。用户生成内容在正式环境应走服务端内容安全接口，不要在小程序里调用。</view>
+</view>

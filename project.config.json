@@ -1,0 +1,39 @@
+{
+  "miniprogramRoot": "miniprogram/",
+  "projectname": "travel-agent",
+  "description": "行程助手。用微信开发者工具打开仓库根目录即可，小程序源码在 miniprogram/。",
+  "appid": "touristappid",
+  "compileType": "miniprogram",
+  "libVersion": "3.7.1",
+  "setting": {
+    "urlCheck": false,
+    "es6": true,
+    "enhance": true,
+    "postcss": true,
+    "minified": true,
+    "minifyWXSS": true,
+    "minifyWXML": true,
+    "ignoreUploadUnusedFiles": true,
+    "ignoreDevUnusedFiles": true,
+    "uploadWithSourceMap": false,
+    "coverView": true,
+    "checkSiteMap": false,
+    "babelSetting": {
+      "ignore": [],
+      "disablePlugins": [],
+      "outputPath": ""
+    }
+  },
+  "packOptions": {
+    "ignore": [
+      { "type": "suffix", "value": ".md" },
+      { "type": "file", "value": "assets/icons/manifest.json" }
+    ],
+    "include": []
+  },
+  "editorSetting": {
+    "tabIndent": "insertSpaces",
+    "tabSize": 2
+  },
+  "condition": {}
+}

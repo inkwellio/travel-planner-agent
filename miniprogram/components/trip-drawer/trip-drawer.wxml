@@ -1,0 +1,54 @@
+<view class="host mask">
+  <view class="panel">
+    <view class="pad">
+      <view class="serif title">我的行程</view>
+      <view class="sub">{{rows.length ? '共 ' + rows.length + ' 条 · 一次对话一条' : '一次对话就是一条行程'}}</view>
+      <view class="create" catch:tap="onCreate">
+        <icon name="add" tone="white" size="36" />
+        <text>新建行程</text>
+      </view>
+      <view class="search">
+        <icon name="search" tone="muted" size="32" />
+        <input class="search-input" type="text" placeholder="搜索我的行程" placeholder-class="ph" value="{{query}}" bind:input="onQuery" />
+      </view>
+    </view>
+    <scroll-view class="list" scroll-y enhanced show-scrollbar="{{false}}">
+      <view wx:if="{{empty || miss}}" class="blank">
+        <view class="blank-title">{{miss ? '没有匹配的行程' : '还没有行程'}}</view>
+        <view class="blank-sub">{{miss ? '换个词，或新建一条行程' : '点上方「新建行程」开始规划'}}</view>
+      </view>
+      <view wx:for="{{groups}}" wx:key="name" wx:for-item="group" class="group">
+        <view class="bucket">{{group.name}}</view>
+        <view
+          wx:for="{{group.rows}}"
+          wx:key="id"
+          wx:for-item="row"
+          class="row {{row.id === activeId ? 'on' : ''}}"
+          data-id="{{row.id}}"
+          catch:tap="onSelect"
+        >
+          <view class="meta">
+            <view class="name ellipsis">{{row.title}}</view>
+            <view wx:if="{{pending === row.id}}" class="ask" catch:tap="noop">
+              <view class="yes {{deletingId === row.id ? 'dis' : ''}}" data-id="{{row.id}}" catch:tap="onRemove">删除</view>
+              <view class="no" catch:tap="onCancel">取消</view>
+            </view>
+            <view wx:else class="stamp">{{row.stamp}}</view>
+          </view>
+          <view wx:if="{{pending !== row.id}}" class="side">
+            <text wx:if="{{row.draft}}" class="ver">{{row.draft}}</text>
+            <view wx:if="{{row.id === activeId}}" class="dot"></view>
+            <view class="del" data-id="{{row.id}}" catch:tap="onAsk">
+              <icon name="delete" tone="muted" size="30" />
+            </view>
+          </view>
+        </view>
+      </view>
+    </scroll-view>
+    <view class="foot">
+      <text wx:if="{{modeText}}" class="mode ellipsis">{{modeText}}</text>
+      <text class="privacy" catch:tap="onPrivacy">隐私说明</text>
+    </view>
+  </view>
+  <view class="dim" catch:tap="onClose"></view>
+</view>

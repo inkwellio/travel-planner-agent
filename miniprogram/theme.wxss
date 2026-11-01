@@ -1,0 +1,30 @@
+/** 宣纸青瓷，对齐 web/src/theme.css 的默认主题。rpx 由 app.json convertRpxToVw 编成 vw。 */
+.host {
+  --bg: #F5F2EC;
+  --paper: #FFFFFF;
+  --low: #FAF8F5;
+  --mist: #E7EDEA;
+  --chip: #E7EDEA;
+  --primary: #5B7B7A;
+  --primary-press: #4D6B6A;
+  --line: #E7EDEA;
+  --line-strong: #D5E1DC;
+  --accent: #B08D57;
+  --ink: #2E3532;
+  --muted: #8A8F8B;
+  --sub: #575E5A;
+  --error: #A4554F;
+  --error-bg: #F1E6E5;
+  --primary-fixed: #E8EDEC;
+  --secondary-fixed: #F3EEE6;
+  --on-sec: #685D43;
+  --on-sec-var: #89734C;
+  --inverse: #2E3532;
+  --inverse-on: #F5F2EC;
+  --dim: #D3DDDA;
+  --serif: "Songti SC", "STSong", "SimSun", serif;
+  --sans: "PingFang SC", "Hiragino Sans GB", "Noto Sans SC", sans-serif;
+}
+
+.serif { font-family: var(--serif); font-weight: 600; }
+.ellipsis { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }

@@ -1,0 +1,69 @@
+function abs(n) { return n < 0 ? -n : n; }
+
+function metrics(ownerInstance) {
+  var ds = ownerInstance.getDataset() || {};
+  return {
+    h: +ds.h,
+    peek: +ds.peek,
+    half: +ds.half,
+    full: +ds.full,
+  };
+}
+
+function follow(newValue, oldValue, ownerInstance, instance) {
+  if (!instance || !instance.setStyle) return;
+  instance.setStyle({ height: (+newValue) + 'px' });
+}
+
+function start(event, ownerInstance) {
+  var m = metrics(ownerInstance);
+  var st = ownerInstance.getState();
+  var touch = event.touches && event.touches[0];
+  if (!touch || !(m.full > m.peek)) return false;
+  st.y = touch.clientY;
+  st.h = m.h > 0 ? m.h : m.peek;
+  st.peek = m.peek;
+  st.half = m.half;
+  st.full = m.full;
+  st.moved = false;
+  st.now = st.h;
+  ownerInstance.removeClass('anim');
+  return false;
+}
+
+function move(event, ownerInstance) {
+  var st = ownerInstance.getState();
+  var touch = event.touches && event.touches[0];
+  if (!touch || st.y === undefined || st.y === null) return false;
+  var dy = st.y - touch.clientY;
+  if (dy > 4 || dy < -4) st.moved = true;
+  var h = st.h + dy;
+  if (h < st.peek) h = st.peek;
+  if (h > st.full) h = st.full;
+  st.now = h;
+  ownerInstance.setStyle({ height: h + 'px' });
+  return false;
+}
+
+function end(event, ownerInstance) {
+  var st = ownerInstance.getState();
+  if (st.y === undefined || st.y === null) return;
+  var h = st.now || st.h || st.peek;
+  if (!st.moved) h = h > st.peek + 8 ? st.peek : st.full;
+  else {
+    var snaps = [st.peek, st.half, st.full];
+    var best = snaps[0];
+    var i;
+    for (i = 1; i < snaps.length; i++) {
+      if (abs(snaps[i] - h) < abs(best - h)) best = snaps[i];
+    }
+    h = best;
+  }
+  ownerInstance.addClass('anim');
+  ownerInstance.setStyle({ height: h + 'px' });
+  ownerInstance.callMethod('onSnap', { height: h });
+  st.y = null;
+  return false;
+}
+
+module.exports = { follow: follow, start: start, move: move, end: end };

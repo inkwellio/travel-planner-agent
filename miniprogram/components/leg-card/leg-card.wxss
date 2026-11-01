@@ -1,0 +1,98 @@
+@import "../../theme.wxss";
+
+.host { display: block; }
+.leg { display: flex; gap: 16rpx; margin: 8rpx 0; }
+.rail { width: 64rpx; display: flex; justify-content: center; padding-top: 32rpx; flex-shrink: 0; }
+.dot {
+  width: 32rpx;
+  height: 32rpx;
+  border-radius: 999rpx;
+  background: var(--accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.panel {
+  flex: 1;
+  min-width: 0;
+  background: var(--low);
+  border: 1px solid var(--line);
+  border-radius: 32rpx;
+  padding: 32rpx;
+  display: flex;
+  flex-direction: column;
+  gap: 20rpx;
+}
+.head { display: flex; flex-wrap: wrap; gap: 12rpx; justify-content: space-between; align-items: center; }
+.route { display: flex; flex-wrap: wrap; gap: 12rpx; align-items: center; min-width: 0; }
+.title { font-size: 26rpx; font-weight: 600; color: var(--ink); }
+.km { font-size: 22rpx; color: var(--muted); }
+.switch {
+  display: flex;
+  padding: 4rpx;
+  border-radius: 40rpx;
+  border: 1px solid var(--line);
+  background: var(--paper);
+}
+.pill {
+  height: 56rpx;
+  padding: 0 20rpx;
+  border-radius: 999rpx;
+  font-size: 22rpx;
+  line-height: 56rpx;
+  color: var(--sub);
+}
+.pill.on { background: var(--primary); color: #fff; font-weight: 500; }
+.block {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 32rpx;
+  padding: 24rpx;
+  display: flex;
+  flex-direction: column;
+  gap: 16rpx;
+}
+.flow, .drive { display: flex; flex-wrap: wrap; align-items: center; gap: 8rpx; font-size: 24rpx; color: var(--ink); }
+.step { display: flex; align-items: center; gap: 6rpx; }
+.line-pill {
+  display: flex;
+  align-items: center;
+  gap: 6rpx;
+  height: 48rpx;
+  padding: 0 16rpx;
+  border-radius: 999rpx;
+  background: var(--primary-fixed);
+  color: var(--primary);
+  font-weight: 500;
+}
+.xfer { font-size: 22rpx; color: var(--sub); }
+.dest { font-weight: 500; }
+.foot {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8rpx;
+  justify-content: space-between;
+  padding-top: 12rpx;
+  border-top: 1px solid var(--chip);
+  font-size: 22rpx;
+  color: var(--muted);
+}
+.em { color: var(--primary); font-weight: 600; }
+.fare { color: var(--primary); font-weight: 600; }
+.park {
+  display: flex;
+  gap: 8rpx;
+  padding-top: 12rpx;
+  border-top: 1px solid var(--chip);
+  color: var(--muted);
+  font-size: 24rpx;
+}
+.ref {
+  margin-left: 8rpx;
+  padding: 0 10rpx;
+  border-radius: 999rpx;
+  font-size: 20rpx;
+  line-height: 32rpx;
+}
+.ref.web { background: var(--secondary-fixed); color: var(--accent); }
+.ref.muted { background: #DCE4E1; color: var(--muted); }

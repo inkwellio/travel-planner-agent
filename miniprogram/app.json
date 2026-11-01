@@ -1,0 +1,25 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/privacy/privacy"
+  ],
+  "window": {
+    "navigationBarTitleText": "行程助手",
+    "navigationBarBackgroundColor": "#FFFFFF",
+    "navigationBarTextStyle": "black",
+    "backgroundColor": "#F5F2EC",
+    "backgroundTextStyle": "dark",
+    "backgroundColorTop": "#F5F2EC",
+    "backgroundColorBottom": "#FFFFFF"
+  },
+  "style": "v2",
+  "lazyCodeLoading": "requiredComponents",
+  "convertRpxToVw": true,
+  "networkTimeout": {
+    "request": 180000,
+    "downloadFile": 20000,
+    "uploadFile": 20000,
+    "connectSocket": 20000
+  },
+  "sitemapLocation": "sitemap.json"
+}

@@ -1,0 +1,71 @@
+<view class="host stop">
+  <view class="num {{card.index === 0 ? 'first' : 'rest'}}">{{card.index + 1}}</view>
+  <view class="panel">
+    <view class="head">
+      <view class="main">
+        <view class="title-row">
+          <text wx:if="{{card.time}}" class="time {{card.index === 0 ? 'time-on' : ''}}">{{card.time}}</text>
+          <text class="name serif">{{card.name}}</text>
+          <text wx:if="{{card.tag}}" class="tag">{{card.tag}}</text>
+          <text wx:if="{{card.sample}}" class="sample">· 示例数据</text>
+        </view>
+        <view wx:if="{{card.rating || card.address || card.phone}}" class="sub">
+          <view wx:if="{{card.rating}}" class="rate">
+            <icon name="star" tone="primary" size="28" />
+            <text>{{card.rating}}</text>
+          </view>
+          <text wx:if="{{card.address}}" class="addr ellipsis">{{card.address}}</text>
+          <view wx:if="{{card.phone}}" class="phone">
+            <icon name="phone" tone="muted" size="26" />
+            <text>{{card.phone}}</text>
+          </view>
+        </view>
+        <view wx:if="{{card.highlights}}" class="hl">
+          <text>{{card.highlights}}</text>
+          <text wx:if="{{card.highlightRef}}" class="ref {{card.highlightRef.kind}}" data-url="{{card.highlightRef.url}}" catch:tap="onRef">{{card.highlightRef.text}}</text>
+        </view>
+      </view>
+      <view class="side">
+        <view class="thumb {{card.indoor ? 'in' : 'out'}}">
+          <image wx:if="{{card.photo && !failed}}" class="photo" src="{{card.photo}}" mode="aspectFill" bind:error="onErr" />
+          <icon wx:elif="{{card.indoor}}" name="museum" tone="accent" size="44" />
+          <icon wx:else name="landscape" tone="primary" size="44" />
+        </view>
+        <view wx:if="{{card.canUp || card.canDown || card.canRemove}}" class="acts">
+          <view wx:if="{{card.canUp}}" class="act" data-dir="-1" catch:tap="onMove">
+            <icon name="arrow_upward" tone="muted" size="28" />
+          </view>
+          <view wx:if="{{card.canDown}}" class="act" data-dir="1" catch:tap="onMove">
+            <icon name="arrow_downward" tone="muted" size="28" />
+          </view>
+          <view wx:if="{{card.canRemove}}" class="act" catch:tap="onRemove">
+            <icon name="delete" tone="muted" size="28" />
+          </view>
+        </view>
+      </view>
+    </view>
+    <view wx:if="{{card.boxes && card.boxes.length}}" class="boxes">
+      <view wx:for="{{card.boxes}}" wx:key="key" wx:for-item="box" class="box">
+        <view class="box-title">
+          <icon wx:if="{{box.icon == 'timer'}}" name="timer" tone="primary" size="32" />
+          <icon wx:elif="{{box.icon == 'confirmation_number'}}" name="confirmation_number" tone="primary" size="32" />
+          <icon wx:elif="{{box.icon == 'accessible_forward'}}" name="accessible_forward" tone="accent" size="32" />
+          <icon wx:else name="restaurant" tone="muted" size="32" />
+          <text class="tone-{{box.tone}}">{{box.title}}</text>
+        </view>
+        <view wx:for="{{box.lines}}" wx:for-item="line" wx:key="label" class="line {{line.strong ? 'strong' : ''}}">
+          <text>{{line.label}}：{{line.value}}</text>
+          <text wx:if="{{line.ref}}" class="ref {{line.ref.kind}}" data-url="{{line.ref.url}}" catch:tap="onRef">{{line.ref.text}}</text>
+        </view>
+      </view>
+    </view>
+    <view wx:if="{{card.tips}}" class="tips">
+      <icon name="tips_and_updates" tone="primary" size="32" />
+      <view class="tips-text">
+        <text class="strong">实用贴士：</text>{{card.tips}}
+        <text wx:if="{{card.tipsRef}}" class="ref {{card.tipsRef.kind}}" data-url="{{card.tipsRef.url}}" catch:tap="onRef">{{card.tipsRef.text}}</text>
+      </view>
+    </view>
+    <view class="fine">出行前请以景区官方信息为准</view>
+  </view>
+</view>

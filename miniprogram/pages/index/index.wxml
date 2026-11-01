@@ -1,0 +1,233 @@
+<view class="app">
+  <view class="header" bind:tap="onHeaderTap" style="height: {{headerPx}}px; padding-top: {{statusPx}}px; padding-right: {{capsulePx}}px;">
+    <view class="header-row">
+      <view class="brand-btn" catch:tap="onMenu">
+        <icon name="menu" tone="muted" size="40" />
+      </view>
+      <view class="brand">
+        <image class="brand-logo" src="/assets/brand/xingcheng-icon.png" mode="aspectFit" />
+      </view>
+      <view class="tabs">
+        <view class="tab {{nav === 'plan' ? 'on' : ''}}" data-nav="plan" catch:tap="onNav">智能规划</view>
+        <view class="tab {{nav === 'trips' ? 'on' : ''}}" data-nav="trips" catch:tap="onNav">我的行程</view>
+      </view>
+    </view>
+  </view>
+
+  <view class="stage" style="top: {{headerPx}}px; bottom: {{stageBottomPx}}px;">
+    <view wx:if="{{loading}}" class="center">加载中…</view>
+    <view wx:elif="{{loadError}}" class="center col">
+      <view class="err">{{loadError}}</view>
+      <view class="retry" catch:tap="boot">重试</view>
+    </view>
+    <block wx:else>
+      <status-bar state="{{state}}" disabled="{{streaming}}" bind:patch="onPatch" />
+      <view wx:if="{{offline}}" class="offline">后端未连接。请启动本机 server，并核对 config.js 的 baseUrl。</view>
+      <scroll-view class="chat" scroll-y enhanced show-scrollbar="{{false}}" scroll-into-view="{{scrollInto}}">
+        <view class="chat-inner">
+          <block wx:for="{{messages}}" wx:key="id" wx:for-item="msg">
+            <view wx:if="{{msg.mine}}" class="user-row">
+              <view class="user-bubble">{{msg.text}}</view>
+            </view>
+            <view wx:else class="bot-row">
+              <view class="avatar"><icon name="auto_awesome" tone="white" size="26" /></view>
+              <view class="bot-main">
+                <view class="who">
+                  <text class="serif who-name">行程助手</text>
+                </view>
+                <view class="bot-bubble">
+                  <text class="bot-text">{{msg.text}}</text>
+                  <view wx:if="{{msg.cards.length}}" class="cards">
+                    <rec-card wx:for="{{msg.cards}}" wx:for-item="card" wx:key="id" card="{{card}}" bind:toggle="onToggle" />
+                  </view>
+                  <view wx:if="{{msg.actions.length}}" class="actions">
+                    <block wx:for="{{msg.actions}}" wx:for-item="act" wx:key="text">
+                      <view class="ghost" data-text="{{act.text}}" catch:tap="onQuick">
+                        <icon wx:if="{{act.icon == 'refresh'}}" name="refresh" tone="ink" size="30" />
+                        <icon wx:if="{{act.icon == 'restaurant'}}" name="restaurant" tone="ink" size="30" />
+                        <text>{{act.label}}</text>
+                      </view>
+                    </block>
+                  </view>
+                </view>
+              </view>
+            </view>
+          </block>
+          <view wx:if="{{busy}}" class="thinking">
+            <view class="avatar"><icon name="auto_awesome" tone="white" size="26" /></view>
+            <text class="thinking-text">思考中…</text>
+          </view>
+          <view id="bottom-anchor" class="anchor"></view>
+        </view>
+      </scroll-view>
+      <view wx:if="{{hasRecommendations && composerOn && !keyboardPx}}" class="generate-bar">
+        <view class="go generate-btn {{!selectedCount || busy || streaming || cooldown ? 'dis' : ''}}" catch:tap="onGenerate">
+          <icon name="auto_awesome" tone="white" size="32" />
+          <text>{{streaming ? '生成中…' : '生成路线（已选 ' + selectedCount + '）'}}</text>
+        </view>
+      </view>
+      <composer
+        wx:if="{{composerOn}}"
+        value="{{composerValue}}"
+        busy="{{busy || streaming}}"
+        cooldown="{{cooldown}}"
+        ready="{{canPlan}}"
+        footer="{{footer}}"
+        bind:send="onSend"
+        bind:draft="onDraft"
+        bind:keyboard="onKeyboard"
+      />
+    </block>
+  </view>
+
+  <sheet-frame
+    hidden="{{keyboardPx > 0}}"
+    height="{{sheetPx}}"
+    peek="{{peekPx}}"
+    half="{{halfPx}}"
+    full="{{fullPx}}"
+    open="{{sheetOpen}}"
+    title="{{sheetTitle}}"
+    data-h="{{sheetPx}}"
+    data-peek="{{peekPx}}"
+    data-half="{{halfPx}}"
+    data-full="{{fullPx}}"
+    bind:snap="onSheetSnap"
+    bind:toggle="onToggleSheet"
+  >
+    <scroll-view class="sheet-body" scroll-y enhanced show-scrollbar="{{false}}" hidden="{{!sheetOpen}}">
+      <view class="sheet-inner">
+        <block wx:if="{{draft && draft.empty}}">
+          <view class="overview">
+            <view class="overview-head">
+              <icon name="map" tone="primary" size="36" />
+              <text class="overview-title">{{draft.overviewTitle}}</text>
+            </view>
+            <view class="lake-wrap">
+              <view class="lake"></view>
+              <view class="lake-label serif">{{draft.city || '先选择目的地'}}</view>
+            </view>
+            <view class="overview-hint">{{draft.overviewHint}}</view>
+          </view>
+        </block>
+        <block wx:elif="{{draft}}">
+          <view class="result-head">
+            <view class="result-title serif">{{draft.heading}}</view>
+            <picker mode="selector" range="{{draft.versionLabels}}" value="{{draft.versionIndex}}" disabled="{{streaming}}" bind:change="onVersion">
+              <view class="ver-pill">
+                <text>历史方案</text>
+                <icon name="arrow_drop_down" tone="muted" size="28" />
+              </view>
+            </picker>
+          </view>
+          <view class="result-actions">
+            <view class="btn solid {{draft.editable ? '' : 'dis'}}" catch:tap="onShare">
+              <icon name="ios_share" tone="white" size="32" />
+              <text>分享</text>
+            </view>
+            <view class="btn ghost {{draft.editable ? '' : 'dis'}}" catch:tap="onExport">
+              <text>导出图片</text>
+            </view>
+          </view>
+          <view wx:if="{{draft.streaming}}" class="stream">
+            <icon name="progress_activity" tone="primary" size="32" spin="{{true}}" />
+            <text>正在逐天细化路线…已完成的天可先查看，全部完成后才能编辑</text>
+          </view>
+          <view wx:for="{{draft.alerts}}" wx:key="day" wx:for-item="alert" class="alert">
+            <icon name="thunderstorm" tone="accent" size="40" />
+            <view class="alert-main">
+              <view class="alert-top">
+                <text class="alert-title">天气提醒与室内备选</text>
+                <text wx:if="{{alert.ref}}" class="ref muted">{{alert.ref.text}}</text>
+              </view>
+              <view class="alert-text">{{alert.text}}</view>
+              <text class="alert-meta">{{alert.meta}}</text>
+            </view>
+          </view>
+          <view class="map-card">
+            <view class="map-head">
+              <view class="map-title">
+                <icon name="map" tone="primary" size="36" />
+                <text>{{draft.city ? draft.city + '全景路线示意' : '全景路线示意'}}</text>
+              </view>
+              <text wx:if="{{draft.totalKm}}" class="km">路线总长约 {{draft.totalKm}} km</text>
+            </view>
+            <map
+              wx:if="{{draft.map.show && sheetOpen && !drawer}}"
+              class="map"
+              latitude="{{draft.map.lat}}"
+              longitude="{{draft.map.lng}}"
+              scale="{{draft.map.scale}}"
+              markers="{{draft.map.markers}}"
+              polyline="{{draft.map.polyline}}"
+              include-points="{{draft.map.include}}"
+              enable-scroll="{{true}}"
+              enable-zoom="{{true}}"
+              show-location="{{false}}"
+            />
+            <view wx:else class="lake-wrap flat">
+              <view class="lake"></view>
+              <view class="lake-label serif">{{draft.map.show ? '上拉后显示路线' : (draft.city || '暂无坐标')}}</view>
+            </view>
+          </view>
+          <scroll-view class="day-tabs" scroll-x enhanced show-scrollbar="{{false}}">
+            <view class="day-row">
+              <view wx:for="{{draft.tabs}}" wx:key="day" wx:for-item="tab" class="day {{tab.on ? 'on' : ''}}" data-index="{{index}}" catch:tap="onDay">
+                <icon wx:if="{{tab.on}}" name="calendar_view_day" tone="white" size="32" />
+                <text>{{tab.label}}</text>
+              </view>
+            </view>
+          </scroll-view>
+          <view wx:if="{{draft.body && draft.body.skeleton}}" class="sk">
+            <view class="sk-title">
+              <icon name="progress_activity" tone="primary" size="32" spin="{{true}}" />
+              <text>正在规划第 {{draft.body.day}} 天…</text>
+            </view>
+            <view wx:for="{{draft.body.names}}" wx:key="key" wx:for-item="spot" class="sk-row">
+              <view class="sk-num">{{index + 1}}</view>
+              <view class="sk-card">
+                <view class="sk-name">{{spot.name}}</view>
+                <view class="sk-bar w1"></view>
+                <view class="sk-bar w2"></view>
+              </view>
+            </view>
+          </view>
+          <view wx:elif="{{draft.body}}">
+            <view wx:if="{{draft.body.summary}}" class="summary">{{draft.body.summary}}</view>
+            <view wx:if="{{draft.body.editable}}" class="drag-hint">用上移 / 下移调整顺序，松手后生成新版本</view>
+            <block wx:for="{{draft.body.stops}}" wx:key="id" wx:for-item="stop">
+              <stop-card card="{{stop}}" bind:move="onMoveStop" bind:remove="onRemoveStop" bind:ref="onRef" />
+              <leg-card wx:if="{{stop.leg}}" leg="{{stop.leg}}" bind:ref="onRef" />
+            </block>
+          </view>
+        </block>
+      </view>
+    </scroll-view>
+  </sheet-frame>
+
+  <view wx:if="{{drawer}}" class="drawer" style="top: {{headerPx}}px;">
+    <trip-drawer
+      style="width: 100%; height: 100%;"
+      rows="{{tripRows}}"
+      active-id="{{activeId}}"
+      deleting-id="{{deletingId}}"
+      mode-text="{{modeText}}"
+      bind:close="closeDrawer"
+      bind:create="onNewTrip"
+      bind:select="onSelectTrip"
+      bind:remove="onRemoveTrip"
+      bind:privacy="onPrivacy"
+    />
+  </view>
+
+  <canvas canvas-id="routeExport" class="export-canvas" style="width: 375px; height: {{exportHeight}}px;"></canvas>
+
+  <view wx:if="{{linkToast}}" class="toast" catch:tap="onCloseLink">
+    <view class="toast-card" catch:tap="noop">
+      <view class="toast-title">{{linkTitle}}</view>
+      <text class="toast-url" selectable>{{linkToast}}</text>
+      <view class="toast-tip">长按链接可复制，在浏览器打开</view>
+      <view class="toast-btn" catch:tap="onCloseLink">关闭</view>
+    </view>
+  </view>
+</view>

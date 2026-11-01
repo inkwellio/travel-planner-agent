@@ -1,0 +1,31 @@
+<wxs src="./sheet.wxs" module="drag" />
+<view
+  class="sheet anim host"
+  style="height: {{height}}px;"
+  prop="{{height}}"
+  change:prop="{{drag.follow}}"
+  data-h="{{height}}"
+  data-peek="{{peek}}"
+  data-half="{{half}}"
+  data-full="{{full}}"
+>
+  <view class="handle">
+    <view
+      class="handle-drag"
+      catch:touchstart="{{drag.start}}"
+      catch:touchmove="{{drag.move}}"
+      catch:touchend="{{drag.end}}"
+      catch:touchcancel="{{drag.end}}"
+    >
+      <view class="grab"></view>
+      <view class="handle-title">
+        <icon name="map" tone="primary" size="32" />
+        <text class="handle-label">{{title}}</text>
+        <icon wx:if="{{open}}" name="expand_more" tone="ink" size="32" />
+        <icon wx:else name="expand_less" tone="ink" size="32" />
+      </view>
+    </view>
+    <view class="sheet-toggle" catch:tap="onToggle">{{open ? '收起' : '展开'}}</view>
+  </view>
+  <slot></slot>
+</view>

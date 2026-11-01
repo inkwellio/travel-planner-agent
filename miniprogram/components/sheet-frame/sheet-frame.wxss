@@ -1,0 +1,22 @@
+.sheet {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 45;
+  background: var(--paper);
+  border-top: 1px solid var(--line);
+  border-top-left-radius: 48rpx;
+  border-top-right-radius: 48rpx;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+.sheet.anim { transition: height 0.3s ease; }
+.handle { height: 64px; flex-shrink: 0; display: flex; align-items: center; padding: 0 16rpx 0 24rpx; box-sizing: border-box; }
+.handle-drag { flex: 1; min-width: 0; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+.grab { width: 80rpx; height: 8rpx; border-radius: 999rpx; background: var(--line-strong); }
+.handle-title { margin-top: 8rpx; display: flex; align-items: center; gap: 8rpx; max-width: 100%; overflow: hidden; }
+.handle-label { font-size: 26rpx; font-weight: 500; color: var(--ink); overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+.sheet-toggle { flex-shrink: 0; height: 56rpx; padding: 0 20rpx; border-radius: 999rpx; border: 1px solid var(--line); color: var(--primary); font-size: 24rpx; line-height: 56rpx; font-weight: 600; }

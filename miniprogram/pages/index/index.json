@@ -1,0 +1,15 @@
+{
+  "navigationStyle": "custom",
+  "disableScroll": true,
+  "backgroundColor": "#F5F2EC",
+  "usingComponents": {
+    "icon": "/components/icon/icon",
+    "sheet-frame": "/components/sheet-frame/sheet-frame",
+    "status-bar": "/components/status-bar/status-bar",
+    "composer": "/components/composer/composer",
+    "trip-drawer": "/components/trip-drawer/trip-drawer",
+    "rec-card": "/components/rec-card/rec-card",
+    "stop-card": "/components/stop-card/stop-card",
+    "leg-card": "/components/leg-card/leg-card"
+  }
+}

@@ -1,0 +1,55 @@
+{
+  "miniprogramRoot": "./",
+  "projectname": "travel-agent",
+  "description": "行程助手小程序。也可从仓库根目录打开，根目录 project.config.json 的 miniprogramRoot 指向这里。",
+  "appid": "touristappid",
+  "compileType": "miniprogram",
+  "libVersion": "3.7.1",
+  "setting": {
+    "urlCheck": false,
+    "es6": true,
+    "enhance": true,
+    "postcss": true,
+    "minified": true,
+    "minifyWXSS": true,
+    "minifyWXML": true,
+    "ignoreUploadUnusedFiles": true,
+    "ignoreDevUnusedFiles": true,
+    "uploadWithSourceMap": false,
+    "coverView": true,
+    "checkSiteMap": false,
+    "babelSetting": {
+      "ignore": [],
+      "disablePlugins": [],
+      "outputPath": ""
+    },
+    "compileWorklet": false,
+    "uglifyFileName": false,
+    "packNpmManually": false,
+    "packNpmRelationList": [],
+    "localPlugins": false,
+    "disableUseStrict": false,
+    "useCompilerPlugins": false,
+    "condition": false
+  },
+  "packOptions": {
+    "ignore": [
+      {
+        "value": ".md",
+        "type": "suffix"
+      },
+      {
+        "value": "assets/icons/manifest.json",
+        "type": "file"
+      }
+    ],
+    "include": []
+  },
+  "editorSetting": {
+    "tabIndent": "insertSpaces",
+    "tabSize": 2
+  },
+  "condition": {},
+  "simulatorPluginLibVersion": {},
+  "isGameTourist": false
+}

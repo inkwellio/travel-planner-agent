@@ -1,0 +1,7 @@
+{
+  "desc": "sitemap 已于微信文档标注下线，仅满足开发者工具对 sitemapLocation 的读取，不依赖收录。",
+  "rules": [{
+    "action": "allow",
+    "page": "*"
+  }]
+}
